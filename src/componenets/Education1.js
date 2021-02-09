@@ -1,8 +1,8 @@
-import React, {useState} from "react";
+import React from "react";
 import "../styles/Education.css"
 
 const EduForm = (props) => {
-    const { onSubmit, onChange, hideEditKey, editSpecific, isEdit, deleteSection} = props;
+    const { onSubmit, onChange, hideEditKey, editSpecific, deleteSection} = props;
     const eachEducation = props.educationData;
     const objSection = "education";
     let mainDisplay;
@@ -29,12 +29,9 @@ const EduForm = (props) => {
     }
 
     // Logic for hiding and unhiding
-    if (hideEditKey === eachEducation.id && hideEditKey != "" && isEdit === false) {
+    if (hideEditKey.includes(eachEducation.id) === true ) {
         mainDisplay = "none";
         btnDisplay = "block";
-    } else if (isEdit === true && editSpecific === eachEducation.id && editSpecific != ""){
-        mainDisplay = "block";
-        btnDisplay = "none";
     } else {
         mainDisplay = "block";
         btnDisplay = "none";
@@ -117,7 +114,7 @@ const EduForm = (props) => {
                 style={{ display: btnDisplay}}
                 onClick={(e) => {editSpecific(e)}}
                 >
-                <button>{eachEducation.uni}</button>
+                <button name={eachEducation.id}>{eachEducation.uni}</button>
             </div>
 
         </div>
@@ -170,7 +167,6 @@ class Education extends React.Component {
             formView = educationData.map((eachEducation, index) => (
                 formView = (
                     <div key={"edu"+index}>
-                        <h3>Education</h3>
                         <PreviewEdu
                         educationData = { eachEducation }
                         />
@@ -181,6 +177,7 @@ class Education extends React.Component {
 
         return (
             <div>
+                <h3>Education</h3>
                 {formView}
             </div>   
         )
@@ -201,3 +198,18 @@ export default Education;
 
 // Set up Preview with education data
 // Need to take out Add button in preview section
+
+
+// Old Code
+
+    // Logic for hiding and unhiding
+    // if (hideEditKey === eachEducation.id && hideEditKey != "" && isEdit === false) {
+    //     mainDisplay = "none";
+    //     btnDisplay = "block";
+    // } else if (isEdit === true && editSpecific === eachEducation.id && editSpecific != ""){
+    //     mainDisplay = "block";
+    //     btnDisplay = "none";
+    // } else {
+    //     mainDisplay = "block";
+    //     btnDisplay = "none";
+    // }

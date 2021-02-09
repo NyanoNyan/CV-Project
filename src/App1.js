@@ -1,5 +1,6 @@
 import React from "react";
 import Education1 from "../src/componenets/Education1"
+import Experience from "../src/componenets/Experience"
 import uniqid from "uniqid";
 import "../src/styles/App.css"
 
@@ -9,8 +10,7 @@ class App extends React.Component {
 
         this.initialState = {
 
-            hideEditKey: "",
-            editKey: "",
+            hideEditKey: [],
             isEdit: false,
 
             isPreview: false,
@@ -23,6 +23,16 @@ class App extends React.Component {
                 startYear: "",
                 endYear: "",
             }],
+
+            experience: [{
+                id: uniqid(),
+                jobTitle: "",
+                companyName: "",
+                startYear: "",
+                endYear: "",
+                description: "",
+            }]
+
         }
         this.state = this.initialState;
 
@@ -52,6 +62,22 @@ class App extends React.Component {
                 }));
     
                 break;
+            
+            case "exp":
+                const newExperience = {
+                    id: uniqid(),
+                    jobTitle: "",
+                    companyName: "",
+                    startYear: "",
+                    endYear: "",
+                    description: "",
+                };
+                this.setState( prevState => ({
+                    experience: [...prevState.experience, newExperience]
+                }));
+    
+                break;
+
             default:
                 alert("Out of expressions")
         }
@@ -64,9 +90,10 @@ class App extends React.Component {
             [section]: this.state[section].map(
                 obj => obj.id === e.target.id ? formData : obj
             ),
-            hideEditKey: e.target.id,
+            hideEditKey: this.state.hideEditKey.concat([e.target.id]),
             isEdit: false
         })
+        console.log(this.state)
     };
 
     onChange = (section, value, mainValues, id) => {
@@ -79,8 +106,10 @@ class App extends React.Component {
     }
 
     editSpecific = (e) => {
+        // Removes key which does not need editing. So only key ids are left to show the form.
+        let removeIdKey = this.state.hideEditKey.filter((obj) => obj != e.target.name);
         this.setState({
-            editKey: e.target.id,
+            hideEditKey: removeIdKey,
             isEdit: true
         })
     };
@@ -133,7 +162,21 @@ class App extends React.Component {
                 />
                 {/* Hides Add button if isPreview is True */}
                 { this.state.isPreview ? null: <button className="edu"
-                onClick={this.addSections}>Add</button>}
+                onClick={this.addSections}>+ Education</button>}
+
+                <Experience 
+                experienceData = {this.state.experience}
+                onSubmit = {this.onSubmit}
+                onChange = {this.onChange}
+                hideEditKey = {this.state.hideEditKey}
+                editSpecific = {this.editSpecific}
+                isEdit = {this.state.isEdit}
+                deleteSection = {this.deleteSection}
+                isPreview = {this.state.isPreview}
+                />
+                {/* Hides Add button if isPreview is True */}
+                { this.state.isPreview ? null: <button className="exp"
+                onClick={this.addSections}>+ Experience</button>}
             </div>
         )
     }
