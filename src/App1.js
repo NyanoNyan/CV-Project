@@ -147,7 +147,6 @@ class App extends React.Component {
     };
 
     changePreview = (e) => {
-        console.log(e.target.textContent);
         if (e.target.textContent === "Preview CV") {
             this.setState({
                 isPreview: true
