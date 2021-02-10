@@ -55,3 +55,16 @@ html {
     right: 4%;
     color: red;
 }
+
+/* .line{
+    width: 20%;
+    left: 39%;
+    height: 47px;
+    border-bottom: 2px solid black;
+    position: absolute;
+} */
+
+.submit-button-info {
+    position: relative;
+    right: 6%;
+}

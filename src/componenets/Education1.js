@@ -116,7 +116,7 @@ const EduForm = (props) => {
                 >
                 <button name={eachEducation.id}>{eachEducation.uni}</button>
             </div>
-
+            
         </div>
     );
     return (
@@ -179,7 +179,7 @@ class Education extends React.Component {
 
         return (
             <div className="div-box-main-edu">
-                <h3>Education</h3>
+                <h3 className="underline-val">Education</h3>
                 {formView}
             </div>   
         )

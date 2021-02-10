@@ -169,11 +169,14 @@ class App extends React.Component {
 
         return (
             <div className="main-holder">
+                <h2>CV Builder</h2>
                 <button
                 onClick={this.changePreview}
                 className="preview-btn"
                 >{previewMessage}
                 </button>
+
+                <div className="line"></div>
 
                 { this.state.isPreview ? null: <h3>Personal Information</h3>}
                 <PersonalInfo 
@@ -183,6 +186,8 @@ class App extends React.Component {
                 deleteSection = {this.deleteSection}
                 isPreview = {this.state.isPreview}
                 />
+
+                <div className="line"></div>
 
                 <Education1 
                 educationData = {this.state.education}
@@ -197,6 +202,8 @@ class App extends React.Component {
                 {/* Hides Add button if isPreview is True */}
                 { this.state.isPreview ? null: <button className="edu"
                 onClick={this.addSections}>+ Education</button>}
+
+                <div className="line"></div>
 
                 <Experience 
                 experienceData = {this.state.experience}
