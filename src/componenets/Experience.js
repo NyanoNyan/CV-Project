@@ -1,4 +1,5 @@
 import React from "react";
+import "../styles/Experience.css"
 
 const ExpForm = (props) => {
     const { onSubmit, onChange, hideEditKey, editSpecific, deleteSection} = props;
@@ -40,66 +41,66 @@ const ExpForm = (props) => {
     let expForm = (
         <div className="container-exp"> 
             <div id="experience-section" style={{ display: mainDisplay}}>
-                <form id={eachExperience.id} onSubmit={handleSubmit}>
-                    <label className="labels">Job Ttile: </label>
+                <form id={eachExperience.id} className="form-edu" onSubmit={handleSubmit}>
+                    <label className="labels-exp">Job Ttile: </label>
                         <input
                             onChange={handleChange}
                             value={eachExperience.jobTitle}
                             type="text"
-                            className="jobTitle-form"
+                            className="input-form"
                             placeholder="Software Engineer"
                             name="jobTitle"
                             required
                         ></input>
 
-                    <label className="labels">Company Name: </label>
+                    <label className="labels-exp">Company Name: </label>
                         <input
                             onChange={handleChange}
                             value={eachExperience.companyName}
                             type="text"
-                            className="companyName-form"
+                            className="input-form"
                             placeholder="Google"
                             name="companyName"
                             required
                         ></input>
                     
-                    <label className="labels">Start Year: </label>
+                    <label className="labels-exp">Start Year: </label>
                         <input
                             onChange={handleChange}
                             value={eachExperience.startYear}
-                            type="text"
-                            type="text"
-                            className="startDate-form"
+                            type="number"
+                            className="input-form"
                             name="startYear"
+                            placeholder="2018"
                             required
                         ></input>
 
-                    <label className="labels">End Date: </label>
+                    <label className="labels-exp">End Date: </label>
                         <input
                             onChange={handleChange}
                             value={eachExperience.endYear}
-                            type="date"
-                            className="endDate-form"
-                            name="endDate"
+                            type="number"
+                            className="input-form"
+                            name="endYear"
                             placeholder="2020"
                             required
                         ></input>
 
-                    <label className="labels">Role Description: </label>
+                    <label className="labels-exp">Role Description: </label>
                         <textarea
                             onChange={handleChange}
                             value={eachExperience.description}
-                            className="description-form"
+                            className="input-form"
                             name="description"
-                            rows="5"
-                            cols="85"
+                            rows="10"
+                            cols="70"
                         ></textarea>
                     
                     <button className="submit-button">Submit</button>
 
                     <button 
                         className="delete-button"
-                        onClick = {(e) => {deleteSection(e)}}
+                        onClick = {(e) => {deleteSection(e, objSection)}}
                         name={eachExperience.id}
                         >Delete
                     </button>
@@ -112,7 +113,7 @@ const ExpForm = (props) => {
                 style={{ display: btnDisplay}}
                 onClick={(e) => {editSpecific(e)}}
                 >
-                <button name={eachExperience.id}>{eachExperience.uni}</button>
+                <button name={eachExperience.id}>{eachExperience.jobTitle}</button>
             </div>
 
         </div>
@@ -122,6 +123,22 @@ const ExpForm = (props) => {
     )
 }
 
+const PreviewExp = (props) => {
+    const experienceData = props.experienceData;
+
+    return (
+        <div className="main-store-exp">
+            <pre className="heading-company-name">{ experienceData.companyName }</pre>
+            <div className="textbox-title-date">
+                <pre>{experienceData.jobTitle}</pre>
+                <pre>{experienceData.endYear}</pre>
+                <pre>{experienceData.startYear}</pre>
+            </div>
+            <pre className="work-description">{experienceData.description}</pre>
+
+        </div>
+    )
+}
 
  class Experience extends React.Component {
      render() {
@@ -143,7 +160,15 @@ const ExpForm = (props) => {
             ));
 
         } else {
-            <div>Testing</div>
+            formView = experienceData.map((eachExperience, index) => (
+                formView = (
+                    <div key={"exp"+index}>
+                        <PreviewExp
+                        experienceData = { eachExperience }
+                        />
+                    </div>
+                )
+            ))
         }
         
          return(

@@ -40,9 +40,9 @@ const EduForm = (props) => {
     // Edu form set up
     let eduForm = (
         <div className="container-edu"> 
-            <div id="education-section" style={{ display: mainDisplay}}>
-                <form id={eachEducation.id} onSubmit={handleSubmit}>
-                    <label className="labels">University name: </label>
+            <div className="education-section" style={{ display: mainDisplay}}>
+                <form id={eachEducation.id} className="form-edu" onSubmit={handleSubmit}>
+                    <label className="labels-edu">University name: </label>
                         <input
                             onChange={handleChange}
                             value={eachEducation.uni}
@@ -53,7 +53,7 @@ const EduForm = (props) => {
                             required
                         ></input>
 
-                    <label className="labels">University location: </label>
+                    <label className="labels-edu">University location: </label>
                         <input
                             onChange={handleChange}
                             value={eachEducation.location}
@@ -64,7 +64,7 @@ const EduForm = (props) => {
                             required
                         ></input>
                     
-                    <label className="labels">Course Name: </label>
+                    <label className="labels-edu">Course Name: </label>
                         <input
                             onChange={handleChange}
                             value={eachEducation.courseName}
@@ -75,7 +75,7 @@ const EduForm = (props) => {
                             required
                         ></input>
 
-                    <label className="labels">Course start year: </label>
+                    <label className="labels-edu">Course start year: </label>
                         <input
                             onChange={handleChange}
                             value={eachEducation.startYear}
@@ -86,7 +86,7 @@ const EduForm = (props) => {
                             required
                         ></input>
 
-                    <label className="labels">Course end year: </label>
+                    <label className="labels-edu">Course end year: </label>
                         <input
                             onChange={handleChange}
                             value={eachEducation.endYear}
@@ -101,7 +101,7 @@ const EduForm = (props) => {
 
                     <button 
                         className="delete-button"
-                        onClick = {(e) => {deleteSection(e)}}
+                        onClick = {(e) => {deleteSection(e, objSection)}}
                         name={eachEducation.id}
                         >Delete
                     </button>
@@ -130,14 +130,15 @@ const PreviewEdu = (props) => {
     return (
         <div className="main-store-edu">
             <div className="textbox-uni-and-location">
-                <pre>{educationData.uni}</pre>
-                <pre>{educationData.location}</pre>
+                <pre className="align-left">{educationData.uni}</pre>
+                <pre className="align-right">{educationData.location}</pre>
+                <div style={{clear: "both"}}></div>
             </div>
 
             <div className="textbox-course-dates">
-                <pre>{educationData.courseName}</pre>
-                <pre>{educationData.startYear}</pre>
-                <pre>{educationData.endYear}</pre>
+                <pre className="align-left">{educationData.courseName}</pre>
+                <pre className="align-right">{educationData.endYear}</pre>
+                <pre className="align-right">{educationData.startYear} -</pre>
             </div>
 
         </div>
@@ -176,7 +177,7 @@ class Education extends React.Component {
         }
 
         return (
-            <div>
+            <div className="div-box-main-edu">
                 <h3>Education</h3>
                 {formView}
             </div>   

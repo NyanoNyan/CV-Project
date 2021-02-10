@@ -1,3 +1,19 @@
 .edu {
     margin-top: 10px;
 }
+
+.main-holder {
+    border: 2px solid black;
+    position: relative;
+    left: 10%;
+    width: 60%;
+    text-align: center;
+}
+
+.exp {
+    margin-bottom: 2%;
+}
+
+.preview-btn {
+    margin-top: 2%;
+}

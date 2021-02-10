@@ -15,6 +15,13 @@ class App extends React.Component {
 
             isPreview: false,
 
+            personalInfo: {
+                firstName: "",
+                lastName: "",
+                email: "",
+                phone: ""
+            },
+
             education: [{
                 id: uniqid(),
                 uni: "",
@@ -114,10 +121,10 @@ class App extends React.Component {
         })
     };
 
-    deleteSection = (e) => {
-        let filterData = this.state.education.filter((prevState) => prevState.id != e.target.name);
+    deleteSection = (e, section) => {
+        let filterData = this.state[section].filter((prevState) => prevState.id != e.target.name);
         this.setState({
-            education: filterData,
+            [section]: filterData,
         })
     };
 
@@ -144,9 +151,10 @@ class App extends React.Component {
         }
 
         return (
-            <div>
+            <div className="main-holder">
                 <button
                 onClick={this.changePreview}
+                className="preview-btn"
                 >{previewMessage}
                 </button>
 

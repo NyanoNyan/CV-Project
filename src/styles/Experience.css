@@ -1,4 +1,4 @@
-.labels-edu {
+.labels-exp {
     display: inline-block;
     float: left;
     clear: left;
@@ -10,7 +10,7 @@
     right: 2%;
 }
 
-.container-edu {
+.container-exp {
     font-size: 14px;
     font-family:'Times New Roman', Times, serif;
     display: block;
@@ -25,7 +25,7 @@
     margin-bottom: 2%;
 }
 
-.form-edu {
+.form-exp {
     position: relative;
     left: 5%;
     margin-bottom: 3%;
@@ -53,6 +53,3 @@
 .align-right {
 	float: right;
 }
-
-/* Add in Personal section */
-/* Then CSS styling to make it look better */
