@@ -1,10 +1,14 @@
+html {
+    overflow-y: scroll;
+}
+
 .edu {
     margin-top: 10px;
 }
 
 .main-holder {
     border: 2px solid black;
-    position: relative;
+    position: absolute;
     left: 10%;
     width: 60%;
     text-align: center;

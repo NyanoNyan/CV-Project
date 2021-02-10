@@ -93,7 +93,7 @@ const ExpForm = (props) => {
                             className="input-form"
                             name="description"
                             rows="10"
-                            cols="70"
+                            cols="50"
                         ></textarea>
                     
                     <button className="submit-button">Submit</button>
