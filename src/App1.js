@@ -1,4 +1,5 @@
 import React from "react";
+import PersonalInfo from "../src/componenets/PersonalInfo"
 import Education1 from "../src/componenets/Education1"
 import Experience from "../src/componenets/Experience"
 import uniqid from "uniqid";
@@ -16,6 +17,7 @@ class App extends React.Component {
             isPreview: false,
 
             personalInfo: {
+                id: uniqid(),
                 firstName: "",
                 lastName: "",
                 email: "",
@@ -91,25 +93,41 @@ class App extends React.Component {
     };
     
     onSubmit = (e, formData, section) => {
+        
         e.preventDefault();
-        // Need to set up for different key in terms of education or work experience
-        this.setState({
-            [section]: this.state[section].map(
-                obj => obj.id === e.target.id ? formData : obj
-            ),
-            hideEditKey: this.state.hideEditKey.concat([e.target.id]),
-            isEdit: false
-        })
-        console.log(this.state)
+        if (section === "personalInfo") {
+            this.setState({
+                [section]: formData
+            });
+        } else {
+            this.setState({
+                [section]: this.state[section].map(
+                    obj => obj.id === e.target.id ? formData : obj
+                ),
+                hideEditKey: this.state.hideEditKey.concat([e.target.id]),
+                isEdit: false
+            })
+        }
     };
 
+    // Change the state depending on the form input
+    // One logic for personalInfo and the other for experience and education
     onChange = (section, value, mainValues, id) => {
-        // Change the state depending on the form input
-        this.setState({
-            [section]: this.state[section].map(
-                obj => obj.id === id ? {...obj, [mainValues]: value} : obj
-            )
-        })
+        if (section === "personalInfo") {
+            this.setState(prevState => ({
+                [section] : {
+                    ...prevState.personalInfo,
+                    [mainValues]: value
+                }
+            }));
+        } else {
+            this.setState({
+                [section]: this.state[section].map(
+                    obj => obj.id === id ? {...obj, [mainValues]: value} : obj
+                )
+            });
+        }
+
     }
 
     editSpecific = (e) => {
@@ -157,6 +175,15 @@ class App extends React.Component {
                 className="preview-btn"
                 >{previewMessage}
                 </button>
+
+                { this.state.isPreview ? null: <h3>Personal Information</h3>}
+                <PersonalInfo 
+                infoData = {this.state.personalInfo}
+                onSubmit = {this.onSubmit}
+                onChange = {this.onChange}
+                deleteSection = {this.deleteSection}
+                isPreview = {this.state.isPreview}
+                />
 
                 <Education1 
                 educationData = {this.state.education}

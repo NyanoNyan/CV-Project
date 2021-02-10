@@ -8,6 +8,7 @@
     left: 10%;
     width: 60%;
     text-align: center;
+    min-height: 500px;
 }
 
 .exp {
@@ -16,4 +17,36 @@
 
 .preview-btn {
     margin-top: 2%;
+}
+
+.bold-and-brash {
+    font-weight: bold;
+}
+
+.align-left {
+    float: left;
+}
+.align-right {
+	float: right;
+}
+
+.input-form {
+    display: block;
+    margin-bottom: 2%;
+}
+
+.submit-button {
+    display: inline;
+    margin-top: 10px;
+    color: green;
+    position: relative;
+    right: 7%;
+}
+
+.delete-button {
+    display: inline;
+    margin-top: 10px;
+    position: relative;
+    right: 4%;
+    color: red;
 }

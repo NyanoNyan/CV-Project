@@ -130,15 +130,16 @@ const PreviewEdu = (props) => {
     return (
         <div className="main-store-edu">
             <div className="textbox-uni-and-location">
-                <pre className="align-left">{educationData.uni}</pre>
-                <pre className="align-right">{educationData.location}</pre>
+                <pre className="bold-and-brash align-left">{educationData.uni}</pre>
+                <pre className="bold-and-brash align-right">{educationData.location}</pre>
                 <div style={{clear: "both"}}></div>
             </div>
 
             <div className="textbox-course-dates">
                 <pre className="align-left">{educationData.courseName}</pre>
                 <pre className="align-right">{educationData.endYear}</pre>
-                <pre className="align-right">{educationData.startYear} -</pre>
+                <pre className="align-right">{educationData.startYear} - </pre>
+                <div style={{clear: "both"}}></div>
             </div>
 
         </div>

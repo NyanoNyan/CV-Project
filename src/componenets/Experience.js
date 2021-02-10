@@ -128,11 +128,12 @@ const PreviewExp = (props) => {
 
     return (
         <div className="main-store-exp">
-            <pre className="heading-company-name">{ experienceData.companyName }</pre>
+            <pre className="bold-and-brash heading-company-name">{ experienceData.companyName }</pre>
             <div className="textbox-title-date">
-                <pre>{experienceData.jobTitle}</pre>
-                <pre>{experienceData.endYear}</pre>
-                <pre>{experienceData.startYear}</pre>
+                <pre className="align-left">{experienceData.jobTitle}</pre>
+                <pre className="align-right">{experienceData.endYear}</pre>
+                <pre className="align-right">{experienceData.startYear} - </pre>
+                <div style={{clear: "both"}}></div>
             </div>
             <pre className="work-description">{experienceData.description}</pre>
 
