@@ -63,7 +63,7 @@ const PerInfoForm = (props) => {
                                 required
                             ></input>
     
-                        <label className="labels-edu">Phone: </label>
+                        <label className="labels-info">Phone: </label>
                             <input
                                 onChange={handleChange}
                                 value={infoData.phone}

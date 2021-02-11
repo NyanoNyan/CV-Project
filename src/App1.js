@@ -5,6 +5,8 @@ import Experience from "../src/componenets/Experience"
 import uniqid from "uniqid";
 import "../src/styles/App.css"
 
+import {Helmet} from "react-helmet";
+
 class App extends React.Component {
     constructor(props) {
         super(props);
@@ -169,6 +171,9 @@ class App extends React.Component {
 
         return (
             <div className="main-holder">
+                <Helmet>
+                    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+                </Helmet>
                 <h2>CV Builder</h2>
                 <button
                 onClick={this.changePreview}

@@ -1,9 +1,10 @@
 .labels-exp {
-    display: inline-block;
-    float: left;
+    display: flex;
+    flex-direction: column;
+    /* float: left;
     clear: left;
     width: 250px;
-    text-align: right;
+    text-align: right; */
     margin-top: 10px;
     margin-bottom: 10px;
     position: relative;
@@ -21,7 +22,8 @@
 }
 
 .form-exp {
-    position: relative;
+    display: flex;
+    flex-direction: column;
     left: 5%;
     margin-bottom: 3%;
     margin-top: 3%;
