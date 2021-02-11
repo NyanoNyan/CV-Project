@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/CV-Project/static/css/main.59860983.chunk.css",
-    "main.js": "/CV-Project/static/js/main.b2aee39a.chunk.js",
-    "main.js.map": "/CV-Project/static/js/main.b2aee39a.chunk.js.map",
+    "main.css": "/CV-Project/static/css/main.30c59bfb.chunk.css",
+    "main.js": "/CV-Project/static/js/main.8d1577a1.chunk.js",
+    "main.js.map": "/CV-Project/static/js/main.8d1577a1.chunk.js.map",
     "runtime-main.js": "/CV-Project/static/js/runtime-main.5aeeea24.js",
     "runtime-main.js.map": "/CV-Project/static/js/runtime-main.5aeeea24.js.map",
-    "static/js/2.7a58c197.chunk.js": "/CV-Project/static/js/2.7a58c197.chunk.js",
-    "static/js/2.7a58c197.chunk.js.map": "/CV-Project/static/js/2.7a58c197.chunk.js.map",
+    "static/js/2.3f73e6f7.chunk.js": "/CV-Project/static/js/2.3f73e6f7.chunk.js",
+    "static/js/2.3f73e6f7.chunk.js.map": "/CV-Project/static/js/2.3f73e6f7.chunk.js.map",
     "index.html": "/CV-Project/index.html",
-    "static/css/main.59860983.chunk.css.map": "/CV-Project/static/css/main.59860983.chunk.css.map",
-    "static/js/2.7a58c197.chunk.js.LICENSE.txt": "/CV-Project/static/js/2.7a58c197.chunk.js.LICENSE.txt"
+    "static/css/main.30c59bfb.chunk.css.map": "/CV-Project/static/css/main.30c59bfb.chunk.css.map",
+    "static/js/2.3f73e6f7.chunk.js.LICENSE.txt": "/CV-Project/static/js/2.3f73e6f7.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.5aeeea24.js",
-    "static/js/2.7a58c197.chunk.js",
-    "static/css/main.59860983.chunk.css",
-    "static/js/main.b2aee39a.chunk.js"
+    "static/js/2.3f73e6f7.chunk.js",
+    "static/css/main.30c59bfb.chunk.css",
+    "static/js/main.8d1577a1.chunk.js"
   ]
 }
