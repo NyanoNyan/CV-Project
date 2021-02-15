@@ -68,11 +68,8 @@ html {
 } */
 
 .submit-button-info {
-    position: relative;
-    right: 6%;
+    color: red;
     margin-top: 5%;
 }
 /* 
 @media only screen and (min-width: 768px){
-
-} */
