@@ -1,6 +1,6 @@
 /* eslint-disable no-trailing-spaces */
 import React from "react";
-import Education from "../src/componenets/Education1"
+import Education from "./componenets/Education1"
 import uniqid from "uniqid";
 
 class App extends React.Component {
