@@ -141,44 +141,42 @@ const PreviewExp = (props) => {
     )
 }
 
- class Experience extends React.Component {
-     render() {
-        const { experienceData, onSubmit, onChange, hideEditKey,
-            editSpecific, isEdit, deleteSection, isPreview } = this.props;
-        let formView;
+ const Experience = (props) => {
+    const { experienceData, onSubmit, onChange, hideEditKey,
+        editSpecific, isEdit, deleteSection, isPreview } = props;
+    let formView;
 
-        if (isPreview === false) {
-            formView = experienceData.map((eachExperience, index) => (
-            <ExpForm key={"exp"+index}
-            experienceData = { eachExperience }
-            onSubmit = {onSubmit}
-            onChange = {onChange}
-            hideEditKey = {hideEditKey}
-            editSpecific = {editSpecific}
-            isEdit =  {isEdit}
-            deleteSection = {deleteSection}
-            /> 
-            ));
+    if (isPreview === false) {
+        formView = experienceData.map((eachExperience, index) => (
+        <ExpForm key={"exp"+index}
+        experienceData = { eachExperience }
+        onSubmit = {onSubmit}
+        onChange = {onChange}
+        hideEditKey = {hideEditKey}
+        editSpecific = {editSpecific}
+        isEdit =  {isEdit}
+        deleteSection = {deleteSection}
+        /> 
+        ));
 
-        } else {
-            formView = experienceData.map((eachExperience, index) => (
-                formView = (
-                    <div key={"exp"+index}>
-                        <PreviewExp
-                        experienceData = { eachExperience }
-                        />
-                    </div>
-                )
-            ))
-        }
-        
-         return(
-             <div>
-                <h3>Experience</h3>
-                {formView}
-             </div>
-         )
-     }
+    } else {
+        formView = experienceData.map((eachExperience, index) => (
+            formView = (
+                <div key={"exp"+index}>
+                    <PreviewExp
+                    experienceData = { eachExperience }
+                    />
+                </div>
+            )
+        ))
+    }
+    
+        return(
+            <div>
+            <h3>Experience</h3>
+            {formView}
+            </div>
+        )
  }
 
  export default Experience

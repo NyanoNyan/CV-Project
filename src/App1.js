@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import PersonalInfo from "../src/componenets/PersonalInfo"
 import Education1 from "../src/componenets/Education1"
 import Experience from "../src/componenets/Experience"
@@ -7,56 +7,37 @@ import "../src/styles/App.css"
 
 import {Helmet} from "react-helmet";
 
-class App extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this.initialState = {
-
-            hideEditKey: [],
-            isEdit: false,
-
-            isPreview: false,
-
-            personalInfo: {
-                id: uniqid(),
-                firstName: "",
-                lastName: "",
-                email: "",
-                phone: ""
-            },
-
-            education: [{
-                id: uniqid(),
-                uni: "",
-                location: "",
-                courseName: "",
-                startYear: "",
-                endYear: "",
-            }],
-
-            experience: [{
-                id: uniqid(),
-                jobTitle: "",
-                companyName: "",
-                startYear: "",
-                endYear: "",
-                description: "",
-            }]
-
-        }
-        this.state = this.initialState;
-
-        this.addSections = this.addSections.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
-        this.onChange = this.onChange.bind(this);
-        this.editSpecific = this.editSpecific.bind(this);
-        this.deleteSection = this.deleteSection.bind(this);
-    }
+const App = () => {
+    const [hideEditKey, setHideEditKey] = useState([]);
+    const [isEdit, setIsEdit] = useState(false);
+    const [isPreview, setIsPreview] = useState(false);
+    const [personalInfo, setPersonalInfo] = useState({
+        id: uniqid(),
+        firstName: "",
+        lastName: "",
+        email: "",
+        phone: ""
+    });
+    const [education, setEducation] = useState([{
+            id: uniqid(),
+            uni: "",
+            location: "",
+            courseName: "",
+            startYear: "",
+            endYear: "",
+        }]);
+    const [experience, setExperience] = useState([{
+            id: uniqid(),
+            jobTitle: "",
+            companyName: "",
+            startYear: "",
+            endYear: "",
+            description: "",
+        }]);
 
     // Sets up blank object data for next input values
     // Need to set it up for different sections such as switching between Education and Experience.
-    addSections = (e) => {
+    const addSections = (e) => {
         let type = e.target.className;
         switch(type) {
             case "edu":
@@ -68,9 +49,7 @@ class App extends React.Component {
                     startYear: "",
                     endYear: "",
                 };
-                this.setState( prevState => ({
-                    education: [...prevState.education, newEducation]
-                }));
+                setEducation([...education, newEducation]);
     
                 break;
             
@@ -83,9 +62,7 @@ class App extends React.Component {
                     endYear: "",
                     description: "",
                 };
-                this.setState( prevState => ({
-                    experience: [...prevState.experience, newExperience]
-                }));
+                setExperience([...experience, newExperience]);
     
                 break;
 
@@ -94,76 +71,91 @@ class App extends React.Component {
         }
     };
     
-    onSubmit = (e, formData, section) => {
-        
+    const onSubmit = (e, formData, section) => {
         e.preventDefault();
+        let holdFuncs = [setEducation, setExperience];
+        let holdVals = [education, experience];
+
         if (section === "personalInfo") {
-            this.setState({
-                [section]: formData
-            });
+            setPersonalInfo(formData);
         } else {
-            this.setState({
-                [section]: this.state[section].map(
+
+            if (section ==="education") {
+                holdFuncs = holdFuncs[0];
+                holdVals = holdVals[0];
+            } else if (section === "experience") {
+                holdFuncs = holdFuncs[1];
+                holdVals = holdVals[1];
+            }
+            holdFuncs(
+                holdVals.map(
                     obj => obj.id === e.target.id ? formData : obj
-                ),
-                hideEditKey: this.state.hideEditKey.concat([e.target.id]),
-                isEdit: false
-            })
+                )
+            )
+            setHideEditKey(hideEditKey.concat([e.target.id]));
+            setIsEdit(false);
         }
     };
 
     // Change the state depending on the form input
     // One logic for personalInfo and the other for experience and education
-    onChange = (section, value, mainValues, id) => {
+    const onChange = (section, value, mainValues, id) => {
+        let holdFuncs = [setEducation, setExperience];
+        let holdVals = [education, experience];
+
         if (section === "personalInfo") {
-            this.setState(prevState => ({
-                [section] : {
-                    ...prevState.personalInfo,
-                    [mainValues]: value
-                }
-            }));
+            setPersonalInfo({...personalInfo, [mainValues]: value});
         } else {
-            this.setState({
-                [section]: this.state[section].map(
-                    obj => obj.id === id ? {...obj, [mainValues]: value} : obj
-                )
-            });
-        }
+
+            if (section ==="education") {
+                holdFuncs = holdFuncs[0];
+                holdVals = holdVals[0];
+            } else if (section === "experience") {
+                holdFuncs = holdFuncs[1];
+                holdVals = holdVals[1];
+            }
+            holdFuncs(holdVals.map(
+                obj => obj.id === id ? {...obj, [mainValues]: value} : obj));
+            }
 
     }
 
-    editSpecific = (e) => {
+    const editSpecific = (e) => {
         // Removes key which does not need editing. So only key ids are left to show the form.
-        let removeIdKey = this.state.hideEditKey.filter((obj) => obj != e.target.name);
-        this.setState({
-            hideEditKey: removeIdKey,
-            isEdit: true
-        })
+        let removeIdKey = hideEditKey.filter((obj) => obj != e.target.name);
+        setHideEditKey(removeIdKey);
+        setIsEdit(true);
     };
 
-    deleteSection = (e, section) => {
-        let filterData = this.state[section].filter((prevState) => prevState.id != e.target.name);
-        this.setState({
-            [section]: filterData,
-        })
+    const deleteSection = (e, section) => {
+        let tempHolder, tempFuncs;
+        let sectionsVals = [personalInfo, education, experience];
+        let sectionFuncs = [setPersonalInfo, setEducation, setExperience];
+        if (section === "personalInfo") {
+            tempHolder = sectionsVals[0];
+            tempFuncs = sectionFuncs[0];
+        } else if (section === "education") {
+            tempHolder = sectionsVals[1];
+            tempFuncs = sectionFuncs[1];
+        } else if (section === "experience") {
+            tempHolder = sectionsVals[2];
+            tempFuncs = sectionFuncs[2];
+        }
+
+        let filterData = tempHolder.filter((prevState) => prevState.id != e.target.name);
+        tempFuncs(filterData)
     };
 
-    changePreview = (e) => {
+    const changePreview = (e) => {
         if (e.target.textContent === "Preview CV") {
-            this.setState({
-                isPreview: true
-            })
+            setIsPreview(true)
         } else if (e.target.textContent === "Back to Builder") {
-            this.setState({
-                isPreview: false
-            })
+            setIsPreview(false)
         }
     };
-
-    render() {
         // Setting up message for Preview button
         let previewMessage;
-        if (this.state.isPreview) {
+        if (isPreview) {
             previewMessage = "Back to Builder"
         } else {
             previewMessage = "Preview CV"
@@ -176,57 +168,55 @@ class App extends React.Component {
                 </Helmet>
                 <h2>CV Builder</h2>
                 <button
-                onClick={this.changePreview}
+                onClick={changePreview}
                 className="preview-btn"
                 >{previewMessage}
                 </button>
 
                 <div className="line"></div>
 
-                { this.state.isPreview ? null: <h3>Personal Information</h3>}
+                { isPreview ? null: <h3>Personal Information</h3>}
                 <PersonalInfo 
-                infoData = {this.state.personalInfo}
-                onSubmit = {this.onSubmit}
-                onChange = {this.onChange}
-                deleteSection = {this.deleteSection}
-                isPreview = {this.state.isPreview}
+                infoData = {personalInfo}
+                onSubmit = {onSubmit}
+                onChange = {onChange}
+                deleteSection = {deleteSection}
+                isPreview = {isPreview}
                 />
 
                 <div className="line"></div>
 
                 <Education1 
-                educationData = {this.state.education}
-                onSubmit = {this.onSubmit}
-                onChange = {this.onChange}
-                hideEditKey = {this.state.hideEditKey}
-                editSpecific = {this.editSpecific}
-                isEdit = {this.state.isEdit}
-                deleteSection = {this.deleteSection}
-                isPreview = {this.state.isPreview}
+                educationData = {education}
+                onSubmit = {onSubmit}
+                onChange = {onChange}
+                hideEditKey = {hideEditKey}
+                editSpecific = {editSpecific}
+                isEdit = {isEdit}
+                deleteSection = {deleteSection}
+                isPreview = {isPreview}
                 />
                 {/* Hides Add button if isPreview is True */}
-                { this.state.isPreview ? null: <button className="edu"
-                onClick={this.addSections}>+ Education</button>}
-
-                <div className="line"></div>
+                { isPreview ? null: <button className="edu"
+                onClick={addSections}>+ Education</button>}
 
                 <Experience 
-                experienceData = {this.state.experience}
-                onSubmit = {this.onSubmit}
-                onChange = {this.onChange}
-                hideEditKey = {this.state.hideEditKey}
-                editSpecific = {this.editSpecific}
-                isEdit = {this.state.isEdit}
-                deleteSection = {this.deleteSection}
-                isPreview = {this.state.isPreview}
+                experienceData = {experience}
+                onSubmit = {onSubmit}
+                onChange = {onChange}
+                hideEditKey = {hideEditKey}
+                editSpecific = {editSpecific}
+                isEdit = {isEdit}
+                deleteSection = {deleteSection}
+                isPreview = {isPreview}
                 />
                 {/* Hides Add button if isPreview is True */}
-                { this.state.isPreview ? null: <button className="exp"
-                onClick={this.addSections}>+ Experience</button>}
+                { isPreview ? null: <button className="exp"
+                onClick={addSections}>+ Experience</button>}
             </div>
         )
-    }
-}
+    
+};
 
 export default App;
 

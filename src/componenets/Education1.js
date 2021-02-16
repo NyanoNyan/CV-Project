@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "../styles/Education.css"
 
 const EduForm = (props) => {
@@ -146,47 +146,43 @@ const PreviewEdu = (props) => {
     )
 }
 
-class Education extends React.Component {
-    render() {
-        const { educationData, onSubmit, onChange, hideEditKey,
-            editSpecific, isEdit, deleteSection, isPreview } = this.props;
-        let formView;
+ const Education = (props) => {
+    const { educationData, onSubmit, onChange, hideEditKey,
+        editSpecific, isEdit, deleteSection, isPreview } = props;
+    let formView;
 
-        if (isPreview === false) {
-            formView = educationData.map((eachEducation, index) => (
-            <EduForm key={"edu"+index}
-            educationData = { eachEducation }
-            onSubmit = {onSubmit}
-            onChange = {onChange}
-            hideEditKey = {hideEditKey}
-            editSpecific = {editSpecific}
-            isEdit =  {isEdit}
-            deleteSection = {deleteSection}
-            /> 
-            ));
+    if (isPreview === false) {
+        formView = educationData.map((eachEducation, index) => (
+        <EduForm key={"edu"+index}
+        educationData = { eachEducation }
+        onSubmit = {onSubmit}
+        onChange = {onChange}
+        hideEditKey = {hideEditKey}
+        editSpecific = {editSpecific}
+        isEdit =  {isEdit}
+        deleteSection = {deleteSection}
+        /> 
+        ));
 
-        } else {
-            formView = educationData.map((eachEducation, index) => (
-                formView = (
-                    <div key={"edu"+index}>
-                        <PreviewEdu
-                        educationData = { eachEducation }
-                        />
-                    </div>
-                )
-            ))
-        }
-
-        return (
-            <div className="div-box-main-edu">
-                <h3 className="underline-val">Education</h3>
-                {formView}
-            </div>   
-        )
+    } else {
+        formView = educationData.map((eachEducation, index) => (
+            formView = (
+                <div key={"edu"+index}>
+                    <PreviewEdu
+                    educationData = { eachEducation }
+                    />
+                </div>
+            )
+        ))
     }
+
+    return (
+        <div className="div-box-main-edu">
+            <h3 className="underline-val">Education</h3>
+            {formView}
+        </div>   
+    )
 }
-
-
 
 export default Education;
 
